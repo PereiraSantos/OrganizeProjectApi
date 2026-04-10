@@ -5,9 +5,9 @@ import { Task } from '../models/task';
 export const createTask = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const body = req.body;
-        const task: Task = { id: Date.now(), name: body.name, description: body.description, idCategory: body.idCategory, status: body.status };
+        const task: Task = { id: Date.now(), name: body.name, description: body.description, idCategory: body.idCategory, idProject: body.idProject, status: body.status };
         await TaskService.initTable();
-        await TaskService.criateTask(body.name, body.description, body.idCategory, 0);
+        await TaskService.criateTask(body.name, body.description, body.idCategory, body.idProject, 0);
         res.status(201).json(task);
     } catch (error) {
         next(error);
@@ -16,7 +16,9 @@ export const createTask = async (req: Request, res: Response, next: NextFunction
 
 export const getTasks = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const task = await TaskService.findTaskAll();
+        await TaskService.initTable();
+        let idProject: any = req.query.idProject;
+        const task = await TaskService.findTaskAll(idProject);
         res.json(task);
     } catch (error) {
         next(error);
@@ -25,6 +27,7 @@ export const getTasks = async (req: Request, res: Response, next: NextFunction) 
 
 export const updateStatus = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        await TaskService.initTable();
         const body = req.body;
         const task: any = { id: body.id, status: body.status };
         await TaskService.updateStatus(body.id, body.status);

@@ -16,6 +16,7 @@ export const createProject = async (req: Request, res: Response, next: NextFunct
 
 export const getProjects = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        await ProjectService.initTable();
         const project = await ProjectService.findProjectAll();
         res.json(project);
     } catch (error) {

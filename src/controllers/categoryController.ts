@@ -16,6 +16,7 @@ export const createCategory = async (req: Request, res: Response, next: NextFunc
 
 export const getCategorys = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        await CategoryService.initTable();
         const category = await CategoryService.findCategoryAll();
         res.json(category);
     } catch (error) {

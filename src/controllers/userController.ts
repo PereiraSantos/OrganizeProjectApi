@@ -16,6 +16,7 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
 
 export const getUsers = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        await UserService.initTable();
         const user = await UserService.findUserAll();
         res.json(user);
     } catch (error) {
@@ -25,6 +26,7 @@ export const getUsers = async (req: Request, res: Response, next: NextFunction) 
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        await UserService.initTable();
         const body = req.body;
         const user = await UserService.findUserByEmaiByPassword(body.email, body.password);
         res.json(user);
