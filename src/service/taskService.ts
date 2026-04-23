@@ -6,8 +6,8 @@ export class TaskService {
         const sql = `
       CREATE TABLE IF NOT EXISTS tasks (
         id SERIAL PRIMARY KEY,
-        name VARCHAR(100) NOT NULL,
-        description VARCHAR(100) NOT NULL,
+        name VARCHAR(1000) NOT NULL,
+        description VARCHAR(1000) NOT NULL,
         id_category INT NOT NULL,
         id_project INT NOT NULL,
         status INT NOT NULL,

@@ -6,8 +6,8 @@ export class ProjectService {
         const sql = `
       CREATE TABLE IF NOT EXISTS projects (
         id SERIAL PRIMARY KEY,
-        name VARCHAR(100) NOT NULL,
-        description VARCHAR(100) NOT NULL,
+        name VARCHAR(1000) NOT NULL,
+        description VARCHAR(1000) NOT NULL,
         creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `;
